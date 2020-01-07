@@ -1,17 +1,18 @@
 @import url(font-awesome.min.css);
 @import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic");
 
-/*
-	Strata by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
+
+
+
+
+
 
 /* Basic */
 
 	body {
 		background: #464646;
 	}
+	
 
 		body.is-loading *, body.is-loading *:before, body.is-loading *:after {
 			-moz-animation: none !important;
@@ -555,6 +556,7 @@
 			.image.avatar img {
 				border-radius: 100%;
 				width: 100%;
+
 			}
 
 /* List */
@@ -1244,4 +1246,7 @@
 	body.is-touch .poptrox-popup .nav-previous,
 	body.is-touch .poptrox-popup .closer {
 		opacity: 1.0 !important;
+	}
+	.avatar{
+		border:1px solid #fff;
 	}
