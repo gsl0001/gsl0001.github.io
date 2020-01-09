@@ -10,7 +10,7 @@
 /* Basic */
 
 	body {
-		background: #464646;
+		background: #fff;
 	}
 	
 
@@ -28,7 +28,8 @@
 		}
 
 	body, input, select, textarea {
-		color: #a2a2a2;
+		/* color: #a2a2a2; */
+		color:#000;
 		font-family: "Source Sans Pro", Helvetica, sans-serif;
 		font-size: 16pt;
 		font-weight: 400;
@@ -934,10 +935,10 @@
 
 	#header {
 		/* background-color: #1f1815; */
-		background-color: #000;
+		/* background-color: #000; */
 		background-attachment: scroll,								fixed;
-		/*background-image: url("images/overlay.png"), url("../images/bg.jpg");*/
-		background-position: top left,							top left;
+		background-image: url("images/overlay.png"), url("../images/bb.jpg");
+		background-position:right;
 		background-repeat: repeat,								no-repeat;
 		background-size: auto,								auto 100%;
 		color: rgba(255, 255, 255, 0.5);
@@ -1247,6 +1248,7 @@
 	body.is-touch .poptrox-popup .closer {
 		opacity: 1.0 !important;
 	}
+	
 	.avatar{
-		border:1px solid #fff;
+		border: 3px solid #fff;
 	}
