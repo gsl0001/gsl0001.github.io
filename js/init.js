@@ -1,8 +1,4 @@
-/*
-	Strata by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
+
 
 (function($) {
 
@@ -108,6 +104,7 @@
 			// Lightbox gallery.
 				$('#two').poptrox({
 					caption: function($a) { return $a.next('h3').text(); },
+					
 					overlayColor: '#2c2c2c',
 					overlayOpacity: 0.85,
 					popupCloserText: '',
