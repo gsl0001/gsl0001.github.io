@@ -3,7 +3,13 @@
 
 
 
+/* my */
 
+.link{
+	font-size: .7em;
+	
+	margin-top: 1em;
+}
 
 
 
@@ -1055,6 +1061,7 @@
 		box-sizing: content-box;
 		-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 		background: #fff;
+		padding:4ex;
 		border-radius: 0.35em;
 		box-shadow: 0 0.1em 0.15em 0 rgba(0, 0, 0, 0.15);
 		overflow: hidden;
@@ -1076,6 +1083,7 @@
 			position: absolute;
 			top: 50%;
 			width: 1em;
+			
 		}
 
 			.poptrox-popup .loader:before {
@@ -1085,10 +1093,13 @@
 				font-style: normal;
 				font-weight: normal;
 				text-transform: none !important;
+				
 			}
 
 			.poptrox-popup .loader:before {
+				
 				content: '\f1ce';
+
 			}
 
 		.poptrox-popup .caption {
@@ -1135,7 +1146,7 @@
 
 			.poptrox-popup .nav-next:before,
 			.poptrox-popup .nav-previous:before {
-				color: #fff;
+				color: #5cc6a7;
 				font-size: 2.5em;
 				height: 1em;
 				line-height: 1em;
@@ -1144,6 +1155,7 @@
 				text-align: center;
 				top: 50%;
 				width: 1.5em;
+				
 			}
 
 		.poptrox-popup .nav-next {
@@ -1153,6 +1165,7 @@
 			.poptrox-popup .nav-next:before {
 				content: '\f105';
 				right: 0;
+				background-color: #000;
 			}
 
 		.poptrox-popup .nav-previous {
@@ -1162,6 +1175,7 @@
 			.poptrox-popup .nav-previous:before {
 				content: '\f104';
 				left: 0;
+				background-color: #000;
 			}
 
 		.poptrox-popup .closer {
@@ -1172,7 +1186,8 @@
 			-ms-transition: opacity 0.2s ease-in-out;
 			transition: opacity 0.2s ease-in-out;
 			-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-			color: #fff;
+			color: #f9683d;
+			
 			height: 4em;
 			line-height: 4em;
 			opacity: 0;
@@ -1211,6 +1226,7 @@
 				position: absolute;
 				top: 50%;
 				width: 1.75em;
+				background-color: #000;
 			}
 
 		.poptrox-popup:hover .nav-next,
