@@ -18,21 +18,21 @@
   --edge:#202020;       /* hairlines, plate borders */
   --dim:#8c8c8c;        /* captions, metadata */
   --read:#c8c8c8;       /* body copy */
-  --lit:#f2f2f2;        /* titles, links — the brightest thing here */
+  --lit:#f2f2f2;        /* titles and links — the brightest thing here */
+  --accent:#9d7bff;     /* each scene overrides this with its own product colour */
   --display:"Archivo",system-ui,sans-serif;
   --body:"Newsreader",Georgia,serif;
   --mono:"Martian Mono",ui-monospace,monospace;
-  --rail:76px; --l:1;
-  --accent:#9d7bff;   /* each scene overrides this with its own product colour */
+  --rail:78px; --l:1;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--room);color:var(--read);
-     font:300 clamp(16.5px,1.1vw,18.5px)/1.65 var(--body);
+body{margin:0;padding-left:var(--rail);background:var(--room);color:var(--read);
+     font:300 clamp(16.5px,1.05vw,18px)/1.65 var(--body);
      -webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit}
-.wrap{max-width:1180px;margin:0 auto;padding:0 32px 0 calc(var(--rail) + 32px)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)}
 
 /* the lamp: one fixed pool of light that never scrolls */
 .lamp{position:fixed;inset:0;z-index:1;pointer-events:none;transition:background .6s;
@@ -42,103 +42,114 @@ a{color:inherit}
 .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(120vw 110vh at 50% 45%,transparent 45%,rgba(0,0,0,.55) 100%)}
 
-/* cue rail: fixed, left, holds the clock */
+/* cue rail */
 .cue{position:fixed;top:0;bottom:0;left:0;width:var(--rail);z-index:4;
      border-right:1px solid var(--edge);background:rgba(10,10,10,.7);
      backdrop-filter:blur(6px);display:flex;flex-direction:column;
-     align-items:center;justify-content:space-between;padding:22px 0}
+     align-items:center;justify-content:space-between;padding:24px 0}
 .cue .mark{font:500 11px/1 var(--mono);letter-spacing:.14em;color:var(--accent);
-           transition:color .4s}
+           transition:color .5s}
 .cue .now{writing-mode:vertical-rl;font:400 11px/1 var(--mono);letter-spacing:.22em;
           text-transform:uppercase;color:var(--dim)}
 .cue .clock{font:400 11px/1 var(--mono);letter-spacing:.1em;color:var(--dim)}
 
-header,section{position:relative;z-index:2}
+header,section,footer{position:relative;z-index:2}
 
-/* hero */
-.hero{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;
-      justify-content:center;padding:120px 0 90px}
+/* ── hero ─────────────────────────────────────────────────────────
+   three bands: kicker at the top, statement on the optical centre,
+   standing details pinned to the floor of the viewport             */
+.hero{min-height:100vh;min-height:100svh;display:grid;
+      grid-template-rows:auto 1fr auto;padding:38px 0 34px;gap:24px}
 .kicker{font:500 11px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;
-        color:var(--dim);margin:0 0 34px}
+        color:var(--dim);margin:0;align-self:start}
+.statement{align-self:center;max-width:22ch}
 h1{font-family:var(--display);font-weight:600;font-stretch:118%;
-   font-size:clamp(2.9rem,7.4vw,6.4rem);line-height:.94;letter-spacing:-.035em;
-   color:var(--lit);margin:0 0 30px;max-width:17ch;text-wrap:balance}
-.lede{margin:0;max-width:58ch;font-size:clamp(1.05rem,1.3vw,1.28rem);color:var(--read)}
+   font-size:clamp(2.7rem,6.6vw,5.8rem);line-height:.95;letter-spacing:-.035em;
+   color:var(--lit);margin:0 0 26px;text-wrap:balance}
+.lede{margin:0;max-width:56ch;font-size:clamp(1.05rem,1.25vw,1.24rem);color:var(--read)}
 .lede b{color:var(--lit);font-weight:400}
-.hint{margin:52px 0 0;color:var(--accent);font:400 11px/1 var(--mono);letter-spacing:.2em;
-      text-transform:uppercase}
+.standing{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;
+          padding-top:22px;border-top:1px solid var(--edge);
+          font:400 10.5px/1.7 var(--mono);letter-spacing:.12em;text-transform:uppercase;
+          color:var(--dim)}
+.standing b{display:block;color:var(--accent);font-weight:400;margin-bottom:6px}
 
-/* scenes */
-.scene{padding:clamp(80px,13vh,150px) 0;--l:1}
-.plate{position:relative;border:1px solid var(--edge);background:var(--stage);
-       overflow:hidden;will-change:transform}
-.plate::after{content:"";position:absolute;inset:0;pointer-events:none;
-       box-shadow:0 0 90px -14px var(--accent),inset 0 0 0 1px rgba(255,255,255,.04);
-       opacity:calc(var(--l)*.9)}
-.plate img{filter:grayscale(calc(1 - var(--l))) contrast(1.04) saturate(calc(.4 + .8*var(--l)))
-           brightness(calc(.5 + .5*var(--l)));transform:translateZ(0);
-           transition:filter .12s linear}
-.plate.pan{aspect-ratio:16/9}
-.plate.pan img{width:100%;height:118%;object-fit:cover;object-position:60% 45%;
-               margin-top:-9%}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.pair .plate:last-child{margin-top:44px}
-.caption{margin:14px 0 0;color:var(--accent);font:400 10.5px/1.7 var(--mono);letter-spacing:.14em;
-         text-transform:uppercase;opacity:calc(.45 + .55*var(--l))}
-
+/* ── scenes: a held column of words, plates travelling past it ──── */
+.scene{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);
+       gap:clamp(28px,5vw,72px);align-items:start;
+       padding:clamp(72px,12vh,132px) 0;border-top:1px solid var(--edge);--l:1}
+.info{position:sticky;top:15vh}
+.no{font:400 10.5px/1 var(--mono);letter-spacing:.2em;color:var(--accent);
+    margin:0 0 18px;opacity:calc(.5 + .5*var(--l))}
 .scene h2{font-family:var(--display);font-weight:600;font-stretch:112%;
-          font-size:clamp(2rem,3.6vw,3.1rem);line-height:1;letter-spacing:-.03em;
-          margin:44px 0 18px;color:var(--lit);opacity:calc(.55 + .45*var(--l))}
-.scene .body{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
-             gap:clamp(28px,5vw,64px);align-items:start}
-.scene p{margin:0;max-width:56ch}
+          font-size:clamp(2rem,3.4vw,2.9rem);line-height:1;letter-spacing:-.03em;
+          margin:0 0 16px;color:var(--lit);opacity:calc(.6 + .4*var(--l))}
+.scene p{margin:0 0 26px;max-width:52ch}
 .scene p b{color:var(--lit);font-weight:400}
 
-/* metadata rows — real fields, not decoration */
-dl{margin:0;font:400 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
-dl div{display:grid;grid-template-columns:104px minmax(0,1fr);gap:16px;
-       padding:13px 0;border-top:1px solid var(--edge);align-items:baseline}
+dl{margin:0;font:400 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+dl div{display:grid;grid-template-columns:92px minmax(0,1fr);gap:14px;
+       padding:12px 0;border-top:1px solid var(--edge);align-items:baseline}
 dl div:last-child{border-bottom:1px solid var(--edge)}
 dt{color:var(--accent);opacity:.85}
 dd{margin:0;color:var(--dim);line-height:1.5;word-break:break-word}
 dd a{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
 dd a:hover{color:var(--lit)}
 
-/* closing index */
-.index{padding:clamp(80px,12vh,140px) 0 40px;position:relative;z-index:2}
-.index h3{font:500 11px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;
-          color:var(--dim);margin:0 0 30px}
-.rows{border-top:1px solid var(--edge)}
-.row{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr) auto;
-     gap:clamp(16px,3vw,44px);align-items:baseline;padding:26px 0;
-     border-bottom:1px solid var(--edge)}
-.row h4{font-family:var(--display);font-weight:600;font-stretch:110%;font-size:1.45rem;
-        letter-spacing:-.02em;margin:0;color:var(--lit)}
-.row p{margin:0;font-size:1rem;color:var(--dim);max-width:56ch}
-.row .meta{font:400 10.5px/1.7 var(--mono);letter-spacing:.12em;text-transform:uppercase;
-           color:#7d7d7d;text-align:right}
-.row .meta a{color:var(--accent);text-decoration:none;border-bottom:1px solid #4a4a4a}
+.media{display:grid;gap:clamp(16px,2.4vw,26px)}
+.plate{position:relative;border:1px solid var(--edge);background:var(--stage);
+       overflow:hidden;will-change:transform}
+.plate::after{content:"";position:absolute;inset:0;pointer-events:none;
+       box-shadow:0 0 90px -14px var(--accent),inset 0 0 0 1px rgba(255,255,255,.04);
+       opacity:calc(var(--l)*.9)}
+.plate img{filter:grayscale(calc(1 - var(--l))) contrast(1.04)
+           saturate(calc(.4 + .8*var(--l))) brightness(calc(.5 + .5*var(--l)));
+           transform:translateZ(0);transition:filter .12s linear}
+.plate.pan{aspect-ratio:16/9}
+.plate.pan img{width:100%;height:118%;object-fit:cover;object-position:60% 45%;
+               margin-top:-9%}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,26px)}
+figure{margin:0}
+figcaption{margin-top:12px;font:400 10.5px/1.7 var(--mono);letter-spacing:.14em;
+           text-transform:uppercase;color:var(--accent);opacity:calc(.4 + .6*var(--l))}
 
-footer{padding:60px 0 90px;font:400 11px/2 var(--mono);letter-spacing:.14em;
-       text-transform:uppercase;color:var(--dim);position:relative;z-index:2;
-       display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+/* ── closing index ──────────────────────────────────────────────── */
+.index{padding:clamp(72px,11vh,120px) 0 48px;border-top:1px solid var(--edge)}
+.index h3{font:500 11px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;
+          color:var(--dim);margin:0 0 26px}
+.row{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr) auto;
+     gap:clamp(20px,5vw,72px);align-items:baseline;padding:24px 0;
+     border-top:1px solid var(--edge)}
+.row:last-child{border-bottom:1px solid var(--edge)}
+.row h4{font-family:var(--display);font-weight:600;font-stretch:110%;font-size:1.4rem;
+        letter-spacing:-.02em;margin:0;color:var(--lit)}
+.row p{margin:0;font-size:1rem;color:var(--dim);max-width:54ch}
+.row .meta{font:400 10.5px/1.7 var(--mono);letter-spacing:.12em;text-transform:uppercase;
+           color:#7d7d7d;text-align:right;white-space:nowrap}
+.row .meta a{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
+
+footer{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);
+       gap:clamp(20px,5vw,72px);padding:44px 0 84px;
+       font:400 11px/2 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+       color:var(--dim)}
 footer a{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
-footer a:hover{border-bottom-color:var(--lit)}
+footer a:hover{color:var(--lit)}
 :focus-visible{outline:2px solid var(--lit);outline-offset:4px}
 
-@media (max-width:860px){
+@media (max-width:900px){
   :root{--rail:0px}
-  .wrap{padding:0 20px}
+  body{padding-left:0;padding-top:34px}
   .cue{top:0;bottom:auto;left:0;right:0;width:auto;height:34px;flex-direction:row;
        padding:0 20px;border-right:0;border-bottom:1px solid var(--edge)}
   .cue .now{writing-mode:horizontal-tb;letter-spacing:.16em}
-  .hero{padding:104px 0 72px}
-  .scene .body{grid-template-columns:1fr;gap:26px}
+  .hero{padding:28px 0 30px}
+  .standing{grid-template-columns:1fr 1fr;gap:16px}
+  .scene{grid-template-columns:1fr;gap:30px;padding:64px 0}
+  .info{position:static}
   .plate.pan{aspect-ratio:4/3}
-  .pair{gap:12px}
-  .pair .plate:last-child{margin-top:22px}
   .row{grid-template-columns:1fr;gap:10px}
-  .row .meta{text-align:left}
+  .row .meta{text-align:left;white-space:normal}
+  footer{grid-template-columns:1fr;gap:10px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
@@ -156,53 +167,68 @@ footer a:hover{border-bottom-color:var(--lit)}
 
 <header class="hero wrap" data-scene="Top">
   <p class="kicker">Gurwinder Singh · Vancouver BC</p>
-  <h1>Built in Vancouver. Running on other people's machines.</h1>
-  <p class="lede">Six shipped things: a radial launcher for Windows, a memory layer for
-    coding agents, two iOS apps, a continuity tool, and a set of options systems that
-    fail closed. <b>Everything here is finished and in use</b> — no concepts, no mockups.</p>
-  <p class="hint">Scroll</p>
+
+  <div class="statement">
+    <h1>Built in Vancouver. Running on other people's machines.</h1>
+    <p class="lede">Six shipped things: a radial launcher for Windows, a memory layer for
+      coding agents, two iOS apps, a continuity tool, and a set of options systems that
+      fail closed. <b>Everything here is finished and in use</b> — no concepts, no mockups.</p>
+  </div>
+
+  <div class="standing">
+    <span><b>Shipped</b>Six products</span>
+    <span><b>Platforms</b>Windows · iOS · CLI</span>
+    <span><b>Written in</b>C# · Swift · Node · Python</span>
+    <span><b>Contact</b><a href="mailto:gsl456789@gmail.com">gsl456789@gmail.com</a></span>
+  </div>
 </header>
 
 <main>
 
   <section class="scene wrap" data-scene="Gola" style="--accent:#9d7bff">
-    <div class="plate pan" data-par="0.10">
-      <img src="img/hero-gola.jpg" width="1800" height="1012"
-        alt="Gola's radial wheel open over a desktop, with Claude, ChatGPT, Edge, Files and Terminal on its ring">
-    </div>
-    <p class="caption">The wheel, held open mid-keystroke</p>
-    <h2>Gola</h2>
-    <div class="body">
+    <div class="info">
+      <p class="no">Windows app</p>
+      <h2>Gola</h2>
       <p>Hold the hotkey and a wheel opens where the cursor already is. Flick toward what
         you want, release — apps, folders, the windows you already have open. A second
         ring carries the small tools you'd otherwise go hunting for: <b>magnifier, timer,
-        colour picker, calculator, quick note</b>. No launcher bar, no search box, no
-        typing.</p>
+        colour picker, calculator, quick note</b>.</p>
       <dl>
         <div><dt>Platform</dt><dd>Windows</dd></div>
         <div><dt>Built with</dt><dd>C#</dd></div>
         <div><dt>Setup</dt><dd><a href="https://gsl0001.github.io/gola/">gsl0001.github.io/gola</a></dd></div>
       </dl>
     </div>
-    <div class="pair" style="margin-top:56px">
-      <div class="plate" data-par="0.05">
-        <img src="img/gola-tools.jpg" width="1200" height="676"
-          alt="Gola's outer Tools ring fanned out with magnifier, calculator, timer, quick note, screenshot and dictate">
-      </div>
-      <div class="plate" data-par="-0.05">
-        <img src="img/gola-settings.jpg" width="1000" height="562" alt="Gola's settings window">
+    <div class="media">
+      <figure>
+        <div class="plate pan" data-par="0.07">
+          <img src="img/hero-gola.jpg" width="1800" height="1012"
+            alt="Gola's radial wheel open over a desktop, with Claude, ChatGPT, Edge, Files and Terminal on its ring">
+        </div>
+        <figcaption>The wheel, held open mid-keystroke</figcaption>
+      </figure>
+      <div class="duo">
+        <figure>
+          <div class="plate" data-par="0.05">
+            <img src="img/gola-tools.jpg" width="1200" height="676"
+              alt="Gola's outer Tools ring fanned out with magnifier, calculator, timer, quick note, screenshot and dictate">
+          </div>
+          <figcaption>Tools ring, fanned out</figcaption>
+        </figure>
+        <figure>
+          <div class="plate" data-par="-0.04">
+            <img src="img/gola-settings.jpg" width="1000" height="562" alt="Gola's settings window">
+          </div>
+          <figcaption>Settings</figcaption>
+        </figure>
       </div>
     </div>
-    <p class="caption">Tools ring, fanned out · settings</p>
   </section>
 
   <section class="scene wrap" data-scene="Cortex" style="--accent:#a78bfa">
-    <div class="plate" data-par="0.08">
-      <img src="img/cortex.jpg" width="1200" height="600"
-        alt="Cortex title card: a local memory and autopilot layer for coding agents">
-    </div>
-    <h2>Cortex</h2>
-    <div class="body">
+    <div class="info">
+      <p class="no">Developer tool · open source</p>
+      <h2>Cortex</h2>
       <p>Memory for coding agents. Claude Code and Codex hand off to each other, and to
         their own future sessions, through <b>one Node process and one SQLite file</b>.
         Nothing leaves the machine. It ships with MCP tools, hooks, a CLI, and an
@@ -213,22 +239,21 @@ footer a:hover{border-bottom-color:var(--lit)}
         <div><dt>Source</dt><dd><a href="https://github.com/gsl0001/Cortex">github.com/gsl0001/Cortex</a></dd></div>
       </dl>
     </div>
+    <div class="media">
+      <figure>
+        <div class="plate" data-par="0.06">
+          <img src="img/cortex.jpg" width="1200" height="600"
+            alt="Cortex title card: a local memory and autopilot layer for coding agents">
+        </div>
+        <figcaption>One process, one file, nothing leaves the machine</figcaption>
+      </figure>
+    </div>
   </section>
 
   <section class="scene wrap" data-scene="SitesLog" style="--accent:#e8703a">
-    <div class="pair" data-par="0.07">
-      <div class="plate">
-        <img src="img/siteslog-home.jpg" width="560" height="1214"
-          alt="SitesLog home screen showing the current jobsite address, counters and quick actions">
-      </div>
-      <div class="plate">
-        <img src="img/siteslog-report.jpg" width="560" height="1214"
-          alt="SitesLog report builder screen">
-      </div>
-    </div>
-    <p class="caption">Home, standing on site · the report builder</p>
-    <h2>SitesLog</h2>
-    <div class="body">
+    <div class="info">
+      <p class="no">iOS app</p>
+      <h2>SitesLog</h2>
       <p>Jobsite photo reports for contractors. It sorts work photos by the site they
         were taken at, then turns a day of them into a <b>PDF, HTML or CSV report</b>
         the client can actually read — without the weight of full construction software.</p>
@@ -238,22 +263,30 @@ footer a:hover{border-bottom-color:var(--lit)}
         <div><dt>Support</dt><dd><a href="https://gsl0001.github.io/siteslog/">gsl0001.github.io/siteslog</a></dd></div>
       </dl>
     </div>
+    <div class="media">
+      <div class="duo">
+        <figure>
+          <div class="plate" data-par="0.06">
+            <img src="img/siteslog-home.jpg" width="560" height="1214"
+              alt="SitesLog home screen showing the current jobsite address, counters and quick actions">
+          </div>
+          <figcaption>Home, standing on site</figcaption>
+        </figure>
+        <figure>
+          <div class="plate" data-par="-0.05">
+            <img src="img/siteslog-report.jpg" width="560" height="1214"
+              alt="SitesLog report builder screen">
+          </div>
+          <figcaption>The report builder</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="scene wrap" data-scene="Moonrain" style="--accent:#a9b3ff">
-    <div class="pair" data-par="0.07">
-      <div class="plate">
-        <img src="img/moonrain-player.jpg" width="560" height="1214"
-          alt="Moonrain playing Tent Rain with a 29 minute sleep timer running">
-      </div>
-      <div class="plate">
-        <img src="img/moonrain-timer.jpg" width="560" height="1214"
-          alt="Moonrain sleep timer sheet with durations, fade out and dim screen options">
-      </div>
-    </div>
-    <p class="caption">Tent Rain, timer running · the timer sheet</p>
-    <h2>Moonrain</h2>
-    <div class="body">
+    <div class="info">
+      <p class="no">iOS app</p>
+      <h2>Moonrain</h2>
       <p>A sleep aid built around the part everyone actually uses: the timer. Pick a
         sound, set a fade-out, let the screen dim itself on the way down.
         <b>Mixes, favourites and Siri shortcuts</b> for the rest.</p>
@@ -263,35 +296,49 @@ footer a:hover{border-bottom-color:var(--lit)}
         <div><dt>Support</dt><dd><a href="https://gsl0001.github.io/sleepaid-site/">gsl0001.github.io/sleepaid-site</a></dd></div>
       </dl>
     </div>
+    <div class="media">
+      <div class="duo">
+        <figure>
+          <div class="plate" data-par="0.06">
+            <img src="img/moonrain-player.jpg" width="560" height="1214"
+              alt="Moonrain playing Tent Rain with a 29 minute sleep timer running">
+          </div>
+          <figcaption>Tent Rain, timer running</figcaption>
+        </figure>
+        <figure>
+          <div class="plate" data-par="-0.05">
+            <img src="img/moonrain-timer.jpg" width="560" height="1214"
+              alt="Moonrain sleep timer sheet with durations, fade out and dim screen options">
+          </div>
+          <figcaption>The timer sheet</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="index wrap" data-scene="Also running" style="--accent:#5fc59a">
     <h3>Also running</h3>
-    <div class="rows">
-      <div class="row">
-        <h4>Tracket</h4>
-        <p>Session continuity for people pairing with coding agents: a Markdown-native
-          roadmap and a live dashboard, so the next session starts where the last one
-          stopped.</p>
-        <p class="meta">Markdown · dashboard<br><a href="https://github.com/gsl0001/tracket">Source</a></p>
-      </div>
-      <div class="row">
-        <h4>Trading systems</h4>
-        <p>Automated SPY options systems — vertical spreads and consecutive-day setups,
-          fail-closed by default, backtested before anything reaches a live broker.</p>
-        <p class="meta">Python · IBKR, Moomoo<br>Private</p>
-      </div>
+    <div class="row">
+      <h4>Tracket</h4>
+      <p>Session continuity for people pairing with coding agents: a Markdown-native
+        roadmap and a live dashboard, so the next session starts where the last one
+        stopped.</p>
+      <p class="meta">Markdown · dashboard<br><a href="https://github.com/gsl0001/tracket">Source</a></p>
+    </div>
+    <div class="row">
+      <h4>Trading systems</h4>
+      <p>Automated SPY options systems — vertical spreads and consecutive-day setups,
+        fail-closed by default, backtested before anything reaches a live broker.</p>
+      <p class="meta">Python · IBKR, Moomoo<br>Private</p>
     </div>
   </section>
 
 </main>
 
 <footer class="wrap">
-  <span>Vancouver BC · <a href="mailto:gsl456789@gmail.com">gsl456789@gmail.com</a></span>
-  <span><a href="https://github.com/gsl0001">github.com/gsl0001</a></span>
-  </footer>
-
-
+  <span>Vancouver BC</span>
+  <span><a href="mailto:gsl456789@gmail.com">gsl456789@gmail.com</a> · <a href="https://github.com/gsl0001">github.com/gsl0001</a></span>
+</footer>
 
 <script>
 // One rAF pass drives the lamp, the plate drift and the clock.
@@ -316,7 +363,7 @@ footer a:hover{border-bottom-color:var(--lit)}
     for (const el of scenes){
       const r = el.getBoundingClientRect();
       const d = Math.abs(r.top + r.height / 2 - lampY) / vh;
-      el.style.setProperty('--l', still ? '1' : Math.max(0, Math.min(1, 1.15 - d)).toFixed(3));
+      el.style.setProperty('--l', still ? '1' : Math.max(0, Math.min(1, 1.25 - d)).toFixed(3));
       const near = Math.abs(r.top - lampY);
       if (near < closestD){ closestD = near; closest = el.dataset.scene; }
     }
@@ -335,7 +382,7 @@ footer a:hover{border-bottom-color:var(--lit)}
     for (const el of plates){
       const box = el.parentElement.getBoundingClientRect();
       const from = box.top + box.height / 2 - vh / 2;
-      const shift = Math.max(-110, Math.min(110, -from * parseFloat(el.dataset.par)));
+      const shift = Math.max(-90, Math.min(90, -from * parseFloat(el.dataset.par)));
       el.style.transform = 'translate3d(0,' + shift.toFixed(1) + 'px,0)';
     }
   }
