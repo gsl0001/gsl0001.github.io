@@ -1,176 +1,220 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gurwinder Singh — tools I build</title>
+<meta name="description" content="Gurwinder Singh builds small desktop, mobile and agent tools: Gola, Cortex, SitesLog, Moonrain, Tracket.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#edeff2; --ink:#101827; --muted:#5f6b7a;
+  --cobalt:#2540f2; --brass:#a97d21; --line:rgba(16,24,39,.14);
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#0b1019; --ink:#e8ecf2; --muted:#8b98a9;
+        --cobalt:#7d90ff; --brass:#d8a94a; --line:rgba(232,236,242,.16);}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body);
+     -webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
 
-<html>
-	<head>
-		<title>Gurwinder Singh</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/jquery.poptrox.min.js"></script>
-		<script src="js/skel.min.js"></script>
-		<script src="js/init.js"></script>
-		<noscript>
-			<link rel="stylesheet" href="css/skel.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-xlarge.css" />
-		</noscript>
-		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-	</head>
-	<body id="top">
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+     padding:28px 0;font:500 13px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.top nav a{margin-left:18px;text-decoration:none;color:var(--muted)}
+.top nav a:hover{color:var(--cobalt)}
 
-		<!-- Header -->
-			<header id="header">
-				
-				<a href="#" class="image avatar"><img src="images/avatar2.png" alt="" /></a>
-				<h1 ><strong>Gurwinder Singh</strong></h1><br />
-				<h1><strong>I am a Coder</strong>, a Designer<br />
-				Imagine and I'll make it true.<br />
-				<u><strong>See it here.</strong></u></h1>
-			</header>
+.hero{display:grid;grid-template-columns:1fr auto;gap:56px;align-items:center;
+      padding:56px 0 72px}
+h1{font:700 clamp(38px,6vw,64px)/1.02 var(--display);letter-spacing:-.03em;margin:0 0 20px;
+   max-width:14ch}
+h1 em{font-style:normal;color:var(--cobalt)}
+.lede{margin:0;max-width:44ch;color:var(--muted);font-size:18px}
 
-		<!-- Main -->
-			<div id="main">
+/* the dial: six projects on a ring, after Gola's radial menu */
+.dial{position:relative;width:clamp(280px,34vw,340px);aspect-ratio:1}
+.dial::before{content:"";position:absolute;inset:16%;border:1px solid var(--line);
+              border-radius:50%}
+.hub{position:absolute;inset:0;display:grid;place-content:center;text-align:center;
+     font:500 12px/1.6 var(--mono);letter-spacing:.06em;text-transform:uppercase;
+     color:var(--muted);width:10ch;margin:auto;pointer-events:none}
+.spoke{position:absolute;left:50%;top:50%;width:108px;height:28px;margin:-14px 0 0 -54px;
+       display:grid;place-content:center;border-radius:14px;
+       font:500 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;
+       text-decoration:none;color:var(--muted);
+       transform:rotate(calc(var(--i)*60deg)) translateY(-42%) rotate(calc(var(--i)*-60deg));
+       transition:color .18s,background .18s}
+.dial{--reach:-142px}
+.spoke{transform:rotate(calc(var(--i)*60deg)) translateY(var(--reach))
+                 rotate(calc(var(--i)*-60deg))}
+.spoke:hover,.spoke:focus-visible{color:var(--paper);background:var(--cobalt);outline:none}
 
-				<!-- One -->
-					<section id="one">
-						<header class="major">
-							<h2>Intro </h2>
-						</header>
-						<p>An independent and self-motivated web developer and Designer and with tested proven and
-							programming skills. Looking to work in an organization where I can utilize and
-							develop my technical and interpersonal skills and grow my career within the company.</p>
-						<ul class="actions">
-							<li><a href="#" class="button">Learn More</a></li>
-						</ul>
-					</section>
+h2{font:500 13px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+   color:var(--muted);margin:0 0 8px}
+.list{border-top:1px solid var(--line)}
+.item{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:24px;
+      padding:26px 0;border-bottom:1px solid var(--line);scroll-margin-top:24px}
+.item h3{font:700 24px/1.2 var(--display);letter-spacing:-.02em;margin:0 0 6px}
+.item p{margin:0;color:var(--muted);max-width:52ch}
+.meta{font:400 12px/1.9 var(--mono);color:var(--muted);letter-spacing:.03em}
+.meta a{color:var(--cobalt);text-decoration:none;border-bottom:1px solid transparent}
+.meta a:hover{border-bottom-color:currentColor}
+.meta .tag{display:block;color:var(--brass)}
 
-				<!-- Two -->
-					<!-- <section id="two">
-						<h2>Recent Work</h2>
-						<div class="row">
-							<article class="6u 12u$(xsmall) work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/thumbs/01.jpg" alt="" /></a>
-								<h3>Bag Design Studio</h3>
-								<p>Interactive and responsive website desingned by me for a interor desinging firm.</p>
-							</article>
-							<article class="6u$ 12u$(xsmall) work-item">
-								<a href="images/fulls/02.jpg" class="image fit thumb"><img src="images/thumbs/02.jpg" alt="" /></a>
-								<h3>Ultricies lacinia interdum</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="6u 12u$(xsmall) work-item">
-								<a href="images/fulls/03.jpg" class="image fit thumb"><img src="images/thumbs/03.jpg" alt="" /></a>
-								<h3>Tortor metus commodo</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="6u$ 12u$(xsmall) work-item">
-								<a href="images/fulls/04.jpg" class="image fit	 thumb"><img src="images/thumbs/04.jpg" alt="" /></a>
-								<h3>Quam neque phasellus</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							
-						</div>
-						
-					-->
+footer{padding:56px 0 72px;font:400 14px/1.9 var(--mono);color:var(--muted)}
+footer a{color:var(--cobalt);text-decoration:none}
+footer a:hover{text-decoration:underline}
 
-					<section id="two">
-						<h2>Recent Work</h2>
-						<div class="row">
-							<article class="6u 12u$(xsmall) work-item">
-								<a href="images/fulls/01.jpg" class="image fit thumb" title="Bag design studios"><img src="images/thumbs/01.jpg"  ></a>
-								<h3>Bag Design Studio</h3>
-								
-								<p>Interactive and responsive website desingned by me for a interor desinging firm.</p>
-								<button class="button link" onclick="window.location.href = 'https://www.bagdesignstudio.com';">See it live</button>
-								<a href="images/fulls/02.jpg" class="image fit thumb" ></a>
-								<h3 class="hid">Bag Design Studio</h3>
-								<a href="images/fulls/03.jpg" class="image fit thumb" ></a>
-								<h3 class="hid">Bag Design Studio</h3>
-								<a href="images/fulls/04.jpg" class="image fit thumb" ></a>
-								<h3 class="hid">Bag Design Studio</h3>
-							</article>
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;gap:40px;padding:32px 0 48px}
+  .dial{justify-self:center;width:min(288px,82vw);--reach:-118px}
+  .spoke{width:92px;margin-left:-46px}
+  .item{grid-template-columns:1fr;gap:10px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .spoke{animation:spoke-in .5s both;animation-delay:calc(var(--i)*60ms + 120ms)}
+  @keyframes spoke-in{
+    from{opacity:0;
+         transform:rotate(calc(var(--i)*60deg)) translateY(calc(var(--reach)*.55))
+                   rotate(calc(var(--i)*-60deg))}
+  }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
 
-							<article class="6u 12u$(xsmall) work-item">
-								<a href="images/fulls/05.png" class="image fit thumb" title="Tekzers"><img src="images/thumbs/02.png"  ></a>
-								<h3>Tekzers</h3>
-								<p>Tech blog website designed using wordpress and some plugins with various functions and asthetic design.</p>
-								<button class="button link" onclick="window.location.href = 'https://www.tekzers.tech';">See it live</button>
-								<a href="images/fulls/06.png" class="image fit thumb" ></a>
-								<h3 class="hid">Tekzers</h3>
-								<a href="images/fulls/07.png" class="image fit thumb" ></a>
-								<h3 class="hid">Tekzers</h3>
-								<a href="images/fulls/08.png" class="image fit thumb" ></a>
-								<h3 class="hid">Tekzers</h3>
-							</article>
+  <div class="top">
+    <span>Gurwinder Singh</span>
+    <nav>
+      <a href="https://github.com/gsl0001">GitHub</a>
+      <a href="mailto:gsl456789@gmail.com">Email</a>
+    </nav>
+  </div>
 
+  <header class="hero">
+    <div>
+      <h1>I build small tools that <em>do one thing well</em>.</h1>
+      <p class="lede">Desktop, mobile, and agent tooling &mdash; mostly things I wanted to
+        exist and could not buy. Six of them are below.</p>
+    </div>
+    <!-- ponytail: spokes are plain anchors placed by --i; JS only swaps the hub label -->
+    <div class="dial" id="dial">
+      <div class="hub" id="hub">Six things I shipped</div>
+      <a class="spoke" style="--i:0" href="#gola">Gola</a>
+      <a class="spoke" style="--i:1" href="#cortex">Cortex</a>
+      <a class="spoke" style="--i:2" href="#siteslog">SitesLog</a>
+      <a class="spoke" style="--i:3" href="#moonrain">Moonrain</a>
+      <a class="spoke" style="--i:4" href="#tracket">Tracket</a>
+      <a class="spoke" style="--i:5" href="#trading">Trading</a>
+    </div>
+  </header>
 
+  <main>
+    <h2>Work</h2>
+    <div class="list">
 
-							
+      <article class="item" id="gola">
+        <div>
+          <h3>Gola</h3>
+          <p>A radial launcher for Windows. Hold a hotkey, flick toward what you want,
+            let go. No start menu, no typing, no hunting through the taskbar.</p>
+        </div>
+        <div class="meta">
+          <span class="tag">C# &middot; Windows</span>
+          <a href="https://gsl0001.github.io/gola/">Site and setup &rarr;</a>
+        </div>
+      </article>
 
+      <article class="item" id="cortex">
+        <div>
+          <h3>Cortex</h3>
+          <p>A local, SQLite-backed memory and autopilot layer for coding agents. Claude
+            Code and Codex keep what they learned between sessions instead of starting
+            cold every time.</p>
+        </div>
+        <div class="meta">
+          <span class="tag">JavaScript &middot; SQLite</span>
+          <a href="https://github.com/gsl0001/Cortex">Source &rarr;</a>
+        </div>
+      </article>
 
-							</div>
+      <article class="item" id="siteslog">
+        <div>
+          <h3>SitesLog</h3>
+          <p>Jobsite photo reports for contractors. Shoot on site, keep everything sorted
+            by project, export a clean PDF, HTML, or CSV report &mdash; without heavy
+            construction software.</p>
+        </div>
+        <div class="meta">
+          <span class="tag">Mobile app</span>
+          <a href="https://gsl0001.github.io/siteslog/">Site and support &rarr;</a>
+        </div>
+      </article>
 
-							<ul class="actions">
-								<li><a href="#" class="button">Full Portfolio</a></li>
-							</ul>
+      <article class="item" id="moonrain">
+        <div>
+          <h3>Moonrain</h3>
+          <p>A sleep aid for iOS. Soundscapes and timers built around actually falling
+            asleep.</p>
+        </div>
+        <div class="meta">
+          <span class="tag">Swift &middot; iOS</span>
+          <a href="https://gsl0001.github.io/sleepaid-site/">Support &rarr;</a>
+        </div>
+      </article>
 
-						</section> 
+      <article class="item" id="tracket">
+        <div>
+          <h3>Tracket</h3>
+          <p>Session continuity for people working with coding agents: a Markdown-native
+            roadmap plus a live dashboard, so a new session picks up where the last one
+            stopped.</p>
+        </div>
+        <div class="meta">
+          <span class="tag">Markdown &middot; Dashboard</span>
+          <a href="https://github.com/gsl0001/tracket">Source &rarr;</a>
+        </div>
+      </article>
 
-				<!-- Three -->
-					<section id="three">
-						<h2>Get In Touch</h2>
-						<p>E-mail me or call me.</p>
-						<div class="row">
-							<div class="8u 12u$(small)">
-								<form method="post" action="#">
-									<div class="row uniform 50%">
-										<div class="6u 12u$(xsmall)"><input type="text" name="name" id="name" placeholder="Name" /></div>
-										<div class="6u$ 12u$(xsmall)"><input type="email" name="email" id="email" placeholder="Email" /></div>
-										<div class="12u$"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
-									</div>
-								</form>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</div>
-							<div class="4u$ 12u$(small)">
-								<ul class="labeled-icons">
-									<li>
-										<h3 class="icon fa-home"><span class="label">Address</span></h3>
-										74a Ave Surrey<br />
-										BC , V3S 0S3<br />
-										Canada
-									</li>
-									<li>
-										<h3 class="icon fa-mobile"><span class="label">Phone</span></h3>
-										+1 604-362-3300
-									</li>
-									<li>
-										<h3 class="icon fa-envelope-o"><span class="label">Email</span></h3>
-										<a href="#">mr.signhgurwinder1998@gmail.com</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</section>
+      <article class="item" id="trading">
+        <div>
+          <h3>Trading systems</h3>
+          <p>Automated SPY options systems &mdash; vertical spreads and consecutive-day
+            setups, fail-closed by default, backtested before anything touches a live
+            broker.</p>
+        </div>
+        <div class="meta">
+          <span class="tag">Python &middot; IBKR, Moomoo</span>
+          <span>Private</span>
+        </div>
+      </article>
 
-				<!-- Four -->
-				
+    </div>
+  </main>
 
-			</div>
+  <footer>
+    Surrey, BC &middot; <a href="mailto:gsl456789@gmail.com">gsl456789@gmail.com</a><br>
+    <a href="https://github.com/gsl0001">github.com/gsl0001</a>
+  </footer>
 
-		<!-- Footer -->
-			<footer id="footer">
-				<ul class="icons">
-					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
-					<li><a href="https://www.instagram.com/gsl0001" class="icon fa-instagram"><span class="label">Dribbble</span></a></li>
-					<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-				</ul>
-				
-			</footer>
-
-	</body>
+</div>
+<script>
+const dial = document.getElementById('dial'), hub = document.getElementById('hub'),
+      idle = hub.textContent;
+const show = e => { if (e.target.classList.contains('spoke')) hub.textContent = e.target.textContent; };
+const reset = () => hub.textContent = idle;
+dial.addEventListener('pointerover', show);
+dial.addEventListener('pointerout', reset);
+dial.addEventListener('focusin', show);
+dial.addEventListener('focusout', reset);
+</script>
+</body>
 </html>
