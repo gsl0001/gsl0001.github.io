@@ -13,104 +13,109 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --void:#08060f; --panel:#100c1c; --line:rgba(255,255,255,.10);
-  --text:#eceaf4; --muted:#9b93b2; --accent:#8b6cff;
+  --black:#000; --panel:#0a0a0a; --line:rgba(255,255,255,.16);
+  --text:#f4f4f4; --muted:#8c8c8c;
   --display:"Bricolage Grotesque",system-ui,sans-serif;
   --body:"IBM Plex Sans",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--void);color:var(--text);
-     font:400 17px/1.65 var(--body);-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--black);color:var(--text);
+     font:400 17px/1.65 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit}
 .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
 
-/* header */
-.bar{position:absolute;top:0;left:0;right:0;z-index:3}
+/* every screenshot is monochrome until you look at it directly */
+.shot img,.phone img,.hero img{filter:grayscale(1) contrast(1.08) brightness(.94);
+                               transition:filter .5s ease}
+.shot:hover img,.phone:hover img{filter:none}
+/* no hover on touch: let the screenshots keep a trace of their own colour */
+@media (hover:none){.shot img,.phone img{filter:grayscale(.72) contrast(1.05)}}
+
+.bar{position:fixed;top:0;left:0;right:0;z-index:5;
+     backdrop-filter:blur(8px);background:rgba(0,0,0,.35);
+     border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+.bar.solid{background:rgba(0,0,0,.82);border-bottom-color:var(--line)}
 .bar .wrap{display:flex;justify-content:space-between;align-items:center;
-           padding-top:22px;padding-bottom:22px;
-           font:500 13px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
-.bar a{color:rgba(255,255,255,.72);text-decoration:none;margin-left:20px}
+           padding-top:18px;padding-bottom:18px;
+           font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+.bar a{color:var(--muted);text-decoration:none;margin-left:22px}
 .bar a:hover{color:#fff}
 
 /* hero */
-.hero{position:relative;min-height:min(94vh,760px);display:flex;align-items:flex-end;
+.hero{position:relative;height:100svh;min-height:560px;display:flex;align-items:flex-end;
       overflow:hidden;border-bottom:1px solid var(--line)}
-.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-          object-position:60% 45%}
-.hero::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(100deg,#08060f 8%,rgba(8,6,15,.86) 38%,rgba(8,6,15,.25) 72%)}
-.hero .wrap{position:relative;z-index:2;padding-bottom:64px;padding-top:140px}
-.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
-         color:var(--accent);margin:0 0 22px}
-h1{font:800 clamp(40px,6.4vw,74px)/1.02 var(--display);letter-spacing:-.035em;
-   margin:0 0 22px;max-width:15ch}
-.hero p{margin:0;max-width:50ch;color:#c6c0d6;font-size:19px}
-.credit{position:absolute;right:28px;bottom:26px;z-index:2;max-width:24ch;text-align:right;
-        font:400 11px/1.6 var(--mono);color:rgba(255,255,255,.42);letter-spacing:.04em}
+.hero .bg{position:absolute;top:-20%;left:0;width:100%;height:140%;will-change:transform}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:60% 45%}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.15) 35%,rgba(0,0,0,.92) 92%)}
+.hero .wrap{position:relative;z-index:2;padding-bottom:clamp(48px,9vh,86px);will-change:transform}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;
+         color:var(--muted);margin:0 0 24px}
+h1{font:800 clamp(40px,7vw,80px)/1 var(--display);letter-spacing:-.04em;
+   margin:0 0 22px;max-width:14ch}
+.hero p{margin:0;max-width:48ch;color:#c9c9c9;font-size:19px}
+.credit{position:absolute;right:28px;bottom:26px;z-index:2;max-width:26ch;text-align:right;
+        font:400 11px/1.6 var(--mono);color:rgba(255,255,255,.38);letter-spacing:.06em}
 
 /* project blocks */
 .proj{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
-      gap:clamp(32px,6vw,72px);align-items:center;
-      padding:clamp(64px,9vw,110px) 0;border-bottom:1px solid var(--line)}
+      gap:clamp(32px,6vw,76px);align-items:center;
+      padding:clamp(72px,11vw,140px) 0;border-bottom:1px solid var(--line)}
 .proj:nth-child(even) .media{order:2}
-.tag{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
-     color:var(--accent);margin:0 0 14px}
-.proj h2{font:600 clamp(30px,3.6vw,44px)/1.05 var(--display);letter-spacing:-.028em;margin:0 0 16px}
-.proj p{margin:0 0 22px;color:var(--muted);max-width:46ch}
+.media{will-change:transform}
+.tag{font:500 12px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;
+     color:var(--muted);margin:0 0 16px}
+.proj h2{font:600 clamp(32px,4vw,50px)/1 var(--display);letter-spacing:-.03em;margin:0 0 18px}
+.proj p{margin:0 0 24px;color:var(--muted);max-width:46ch}
 .proj p b{color:var(--text);font-weight:500}
-.links{display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center;
-       font:500 13px/1 var(--mono);letter-spacing:.04em}
-.btn{display:inline-block;padding:11px 16px;border-radius:999px;text-decoration:none;
-     border:1px solid var(--accent);color:var(--accent);transition:background .18s,color .18s}
-.btn:hover{background:var(--accent);color:var(--void)}
-.stack{color:#6f688a;padding:11px 0}
+.links{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;
+       font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.btn{display:inline-block;padding:13px 20px;border-radius:999px;text-decoration:none;
+     border:1px solid var(--text);color:var(--text);
+     transition:background .2s,color .2s}
+.btn:hover{background:var(--text);color:var(--black)}
+.stack{color:#666;padding:13px 0;letter-spacing:.08em}
 
-/* media */
-.shot{border-radius:16px;border:1px solid var(--line);overflow:hidden;
-      background:var(--panel);box-shadow:0 30px 60px -30px #000}
-.shot img{width:100%}
-.stackshots{display:grid;gap:18px}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
-.phone{border-radius:26px;border:1px solid var(--line);overflow:hidden;background:#000;
-       box-shadow:0 34px 70px -34px #000}
-.pair .phone:last-child{transform:translateY(26px)}
+.shot{border-radius:2px;border:1px solid var(--line);overflow:hidden;background:var(--panel)}
+.stackshots{display:grid;gap:20px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.phone{border-radius:22px;border:1px solid var(--line);overflow:hidden;background:#000}
+.pair .phone:last-child{transform:translateY(28px)}
 
-/* small cards */
-.more{padding:clamp(56px,8vw,96px) 0}
-.more h3{font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
-         color:var(--muted);margin:0 0 24px}
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.card{border:1px solid var(--line);border-radius:16px;padding:26px 26px 24px;
-      background:linear-gradient(180deg,rgba(255,255,255,.035),transparent)}
-.card h4{font:600 22px/1.2 var(--display);letter-spacing:-.02em;margin:0 0 10px}
-.card p{margin:0 0 18px;color:var(--muted);font-size:15.5px}
+.more{padding:clamp(64px,9vw,110px) 0}
+.more h3{font:500 12px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;
+         color:var(--muted);margin:0 0 28px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);
+       border:1px solid var(--line)}
+.card{background:var(--black);padding:32px 30px 30px}
+.card h4{font:600 24px/1.2 var(--display);letter-spacing:-.02em;margin:0 0 12px}
+.card p{margin:0 0 20px;color:var(--muted);font-size:15.5px}
 
-footer{border-top:1px solid var(--line);padding:44px 0 64px;
-       font:400 14px/1.9 var(--mono);color:var(--muted);
+footer{border-top:1px solid var(--line);padding:44px 0 72px;
+       font:400 13px/1.9 var(--mono);color:var(--muted);letter-spacing:.06em;
        display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-footer a{color:#c3b9ff;text-decoration:none}
-footer a:hover{text-decoration:underline}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+footer a{color:var(--text);text-decoration:none;border-bottom:1px solid #444}
+footer a:hover{border-bottom-color:var(--text)}
+:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 @media (max-width:820px){
-  .proj{grid-template-columns:1fr;gap:32px;padding:56px 0}
+  .proj{grid-template-columns:1fr;gap:34px;padding:64px 0}
   .proj:nth-child(even) .media{order:0}
   .cards{grid-template-columns:1fr}
-  .hero .wrap{padding-top:120px;padding-bottom:52px}
-  .hero::after{background:linear-gradient(180deg,rgba(8,6,15,.55) 0%,rgba(8,6,15,.92) 62%)}
   .credit{display:none}
-  .bar .wrap{font-size:11px;letter-spacing:.04em}
-  .bar a{margin-left:14px}
+  .bar .wrap{font-size:11px;letter-spacing:.08em}
+  .bar a{margin-left:16px}
   .bar a[href="#work"]{display:none}
 }
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 
-<div class="bar"><div class="wrap">
+<div class="bar" id="bar"><div class="wrap">
   <span>Gurwinder Singh</span>
   <nav>
     <a href="#work">Work</a>
@@ -120,8 +125,10 @@ footer a:hover{text-decoration:underline}
 </div></div>
 
 <header class="hero">
-  <img src="img/hero-gola.jpg" alt="Gola's radial launcher wheel open over a desktop, with Claude, ChatGPT, Edge, Files and Terminal on its ring">
-  <div class="wrap">
+  <div class="bg" data-par="0.18">
+    <img src="img/hero-gola.jpg" alt="Gola's radial launcher wheel open over a desktop, with Claude, ChatGPT, Edge, Files and Terminal on its ring">
+  </div>
+  <div class="wrap" data-par="-0.12">
     <p class="eyebrow">Surrey, BC · building since 2019</p>
     <h1>Windows apps, iOS apps, and the tooling in between.</h1>
     <p>I design and build products end to end — the app, the site, the store listing,
@@ -132,8 +139,8 @@ footer a:hover{text-decoration:underline}
 
 <main class="wrap" id="work">
 
-  <section class="proj" style="--accent:#9b7dff">
-    <div class="media stackshots">
+  <section class="proj">
+    <div class="media stackshots" data-par="0.06">
       <div class="shot"><img src="img/gola-tools.jpg" loading="lazy"
         alt="Gola's outer Tools ring fanned out with magnifier, calculator, timer, quick note, screenshot and dictate"></div>
       <div class="shot"><img src="img/gola-settings.jpg" loading="lazy"
@@ -153,8 +160,8 @@ footer a:hover{text-decoration:underline}
     </div>
   </section>
 
-  <section class="proj" style="--accent:#a78bfa">
-    <div class="media">
+  <section class="proj">
+    <div class="media" data-par="0.06">
       <div class="shot"><img src="img/cortex.jpg" loading="lazy"
         alt="Cortex title card: a local memory and autopilot layer for coding agents"></div>
     </div>
@@ -172,8 +179,8 @@ footer a:hover{text-decoration:underline}
     </div>
   </section>
 
-  <section class="proj" style="--accent:#e0662f">
-    <div class="media pair">
+  <section class="proj">
+    <div class="media pair" data-par="0.06">
       <div class="phone"><img src="img/siteslog-home.jpg" loading="lazy"
         alt="SitesLog home screen showing the current jobsite address, counters and quick actions"></div>
       <div class="phone"><img src="img/siteslog-report.jpg" loading="lazy"
@@ -192,8 +199,8 @@ footer a:hover{text-decoration:underline}
     </div>
   </section>
 
-  <section class="proj" style="--accent:#a9b3ff">
-    <div class="media pair">
+  <section class="proj">
+    <div class="media pair" data-par="0.06">
       <div class="phone"><img src="img/moonrain-player.jpg" loading="lazy"
         alt="Moonrain playing Tent Rain with a 29 minute sleep timer running"></div>
       <div class="phone"><img src="img/moonrain-timer.jpg" loading="lazy"
@@ -215,14 +222,14 @@ footer a:hover{text-decoration:underline}
   <section class="more">
     <h3>Also running</h3>
     <div class="cards">
-      <div class="card" style="--accent:#9b7dff">
+      <div class="card">
         <h4>Tracket</h4>
         <p>Session continuity for people pairing with coding agents: a Markdown-native
           roadmap plus a live dashboard, so the next session starts where the last
           one stopped.</p>
         <div class="links"><a class="btn" href="https://github.com/gsl0001/tracket">Source</a></div>
       </div>
-      <div class="card" style="--accent:#4fb286">
+      <div class="card">
         <h4>Trading systems</h4>
         <p>Automated SPY options systems — vertical spreads and consecutive-day setups,
           fail-closed by default, backtested before anything reaches a live broker.
@@ -238,5 +245,31 @@ footer a:hover{text-decoration:underline}
   </footer>
 
 </main>
+
+<script>
+// ponytail: one rAF-throttled scroll pass drives every parallax layer
+const bar = document.getElementById('bar');
+const layers = [...document.querySelectorAll('[data-par]')].map(el => ({
+  el, speed: parseFloat(el.dataset.par)
+}));
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let queued = false;
+
+function frame(){
+  queued = false;
+  bar.classList.toggle('solid', scrollY > 40);
+  if (still) return;
+  const mid = innerHeight / 2;
+  for (const {el, speed} of layers){
+    // measure the untransformed parent, or the layer would chase its own transform
+    const box = el.parentElement.getBoundingClientRect();
+    const from = box.top + box.height / 2 - mid;   // distance past the viewport centre
+    el.style.transform = 'translate3d(0,' + (-from * speed).toFixed(1) + 'px,0)';
+  }
+}
+addEventListener('scroll', () => { if (!queued){ queued = true; requestAnimationFrame(frame); } }, {passive:true});
+addEventListener('resize', frame, {passive:true});
+frame();
+</script>
 </body>
 </html>
