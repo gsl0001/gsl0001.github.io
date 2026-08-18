@@ -23,6 +23,7 @@
   --body:"Newsreader",Georgia,serif;
   --mono:"Martian Mono",ui-monospace,monospace;
   --rail:76px; --l:1;
+  --accent:#9d7bff;   /* each scene overrides this with its own product colour */
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -34,8 +35,10 @@ a{color:inherit}
 .wrap{max-width:1180px;margin:0 auto;padding:0 32px 0 calc(var(--rail) + 32px)}
 
 /* the lamp: one fixed pool of light that never scrolls */
-.lamp{position:fixed;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(58vw 52vh at 54% 44%,rgba(255,255,255,.075),transparent 70%)}
+.lamp{position:fixed;inset:0;z-index:1;pointer-events:none;transition:background .6s;
+  background:radial-gradient(58vw 52vh at 54% 44%,rgba(255,255,255,.075),transparent 70%);
+  background:radial-gradient(58vw 52vh at 54% 44%,
+             color-mix(in srgb,var(--accent) 12%,rgba(255,255,255,.09)),transparent 70%)}
 .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(120vw 110vh at 50% 45%,transparent 45%,rgba(0,0,0,.55) 100%)}
 
@@ -44,7 +47,8 @@ a{color:inherit}
      border-right:1px solid var(--edge);background:rgba(10,10,10,.7);
      backdrop-filter:blur(6px);display:flex;flex-direction:column;
      align-items:center;justify-content:space-between;padding:22px 0}
-.cue .mark{font:500 11px/1 var(--mono);letter-spacing:.14em;color:var(--lit)}
+.cue .mark{font:500 11px/1 var(--mono);letter-spacing:.14em;color:var(--accent);
+           transition:color .4s}
 .cue .now{writing-mode:vertical-rl;font:400 11px/1 var(--mono);letter-spacing:.22em;
           text-transform:uppercase;color:var(--dim)}
 .cue .clock{font:400 11px/1 var(--mono);letter-spacing:.1em;color:var(--dim)}
@@ -61,22 +65,26 @@ h1{font-family:var(--display);font-weight:600;font-stretch:118%;
    color:var(--lit);margin:0 0 30px;max-width:17ch;text-wrap:balance}
 .lede{margin:0;max-width:58ch;font-size:clamp(1.05rem,1.3vw,1.28rem);color:var(--read)}
 .lede b{color:var(--lit);font-weight:400}
-.hint{margin:52px 0 0;font:400 11px/1 var(--mono);letter-spacing:.2em;
-      text-transform:uppercase;color:var(--dim)}
+.hint{margin:52px 0 0;color:var(--accent);font:400 11px/1 var(--mono);letter-spacing:.2em;
+      text-transform:uppercase}
 
 /* scenes */
 .scene{padding:clamp(80px,13vh,150px) 0;--l:1}
-.plate{border:1px solid var(--edge);background:var(--stage);overflow:hidden;
-       will-change:transform}
-.plate img{filter:grayscale(1) contrast(1.04)
-           brightness(calc(.42 + .58*var(--l)));transform:translateZ(0)}
+.plate{position:relative;border:1px solid var(--edge);background:var(--stage);
+       overflow:hidden;will-change:transform}
+.plate::after{content:"";position:absolute;inset:0;pointer-events:none;
+       box-shadow:0 0 90px -14px var(--accent),inset 0 0 0 1px rgba(255,255,255,.04);
+       opacity:calc(var(--l)*.9)}
+.plate img{filter:grayscale(calc(1 - var(--l))) contrast(1.04) saturate(calc(.4 + .8*var(--l)))
+           brightness(calc(.5 + .5*var(--l)));transform:translateZ(0);
+           transition:filter .12s linear}
 .plate.pan{aspect-ratio:16/9}
 .plate.pan img{width:100%;height:118%;object-fit:cover;object-position:60% 45%;
                margin-top:-9%}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 .pair .plate:last-child{margin-top:44px}
-.caption{margin:14px 0 0;font:400 10.5px/1.7 var(--mono);letter-spacing:.14em;
-         text-transform:uppercase;color:var(--dim)}
+.caption{margin:14px 0 0;color:var(--accent);font:400 10.5px/1.7 var(--mono);letter-spacing:.14em;
+         text-transform:uppercase;opacity:calc(.45 + .55*var(--l))}
 
 .scene h2{font-family:var(--display);font-weight:600;font-stretch:112%;
           font-size:clamp(2rem,3.6vw,3.1rem);line-height:1;letter-spacing:-.03em;
@@ -91,10 +99,10 @@ dl{margin:0;font:400 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppe
 dl div{display:grid;grid-template-columns:104px minmax(0,1fr);gap:16px;
        padding:13px 0;border-top:1px solid var(--edge);align-items:baseline}
 dl div:last-child{border-bottom:1px solid var(--edge)}
-dt{color:#7d7d7d}
+dt{color:var(--accent);opacity:.85}
 dd{margin:0;color:var(--dim);line-height:1.5;word-break:break-word}
-dd a{color:var(--lit);text-decoration:none;border-bottom:1px solid #4a4a4a}
-dd a:hover{border-bottom-color:var(--lit)}
+dd a{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
+dd a:hover{color:var(--lit)}
 
 /* closing index */
 .index{padding:clamp(80px,12vh,140px) 0 40px;position:relative;z-index:2}
@@ -109,12 +117,12 @@ dd a:hover{border-bottom-color:var(--lit)}
 .row p{margin:0;font-size:1rem;color:var(--dim);max-width:56ch}
 .row .meta{font:400 10.5px/1.7 var(--mono);letter-spacing:.12em;text-transform:uppercase;
            color:#7d7d7d;text-align:right}
-.row .meta a{color:var(--lit);text-decoration:none;border-bottom:1px solid #4a4a4a}
+.row .meta a{color:var(--accent);text-decoration:none;border-bottom:1px solid #4a4a4a}
 
 footer{padding:60px 0 90px;font:400 11px/2 var(--mono);letter-spacing:.14em;
        text-transform:uppercase;color:var(--dim);position:relative;z-index:2;
        display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
-footer a{color:var(--lit);text-decoration:none;border-bottom:1px solid #4a4a4a}
+footer a{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
 footer a:hover{border-bottom-color:var(--lit)}
 :focus-visible{outline:2px solid var(--lit);outline-offset:4px}
 
@@ -157,7 +165,7 @@ footer a:hover{border-bottom-color:var(--lit)}
 
 <main>
 
-  <section class="scene wrap" data-scene="Gola">
+  <section class="scene wrap" data-scene="Gola" style="--accent:#9d7bff">
     <div class="plate pan" data-par="0.10">
       <img src="img/hero-gola.jpg" width="1800" height="1012"
         alt="Gola's radial wheel open over a desktop, with Claude, ChatGPT, Edge, Files and Terminal on its ring">
@@ -188,7 +196,7 @@ footer a:hover{border-bottom-color:var(--lit)}
     <p class="caption">Tools ring, fanned out · settings</p>
   </section>
 
-  <section class="scene wrap" data-scene="Cortex">
+  <section class="scene wrap" data-scene="Cortex" style="--accent:#a78bfa">
     <div class="plate" data-par="0.08">
       <img src="img/cortex.jpg" width="1200" height="600"
         alt="Cortex title card: a local memory and autopilot layer for coding agents">
@@ -207,7 +215,7 @@ footer a:hover{border-bottom-color:var(--lit)}
     </div>
   </section>
 
-  <section class="scene wrap" data-scene="SitesLog">
+  <section class="scene wrap" data-scene="SitesLog" style="--accent:#e8703a">
     <div class="pair" data-par="0.07">
       <div class="plate">
         <img src="img/siteslog-home.jpg" width="560" height="1214"
@@ -232,7 +240,7 @@ footer a:hover{border-bottom-color:var(--lit)}
     </div>
   </section>
 
-  <section class="scene wrap" data-scene="Moonrain">
+  <section class="scene wrap" data-scene="Moonrain" style="--accent:#a9b3ff">
     <div class="pair" data-par="0.07">
       <div class="plate">
         <img src="img/moonrain-player.jpg" width="560" height="1214"
@@ -257,7 +265,7 @@ footer a:hover{border-bottom-color:var(--lit)}
     </div>
   </section>
 
-  <section class="index wrap" data-scene="Also running">
+  <section class="index wrap" data-scene="Also running" style="--accent:#5fc59a">
     <h3>Also running</h3>
     <div class="rows">
       <div class="row">
@@ -312,7 +320,13 @@ footer a:hover{border-bottom-color:var(--lit)}
       const near = Math.abs(r.top - lampY);
       if (near < closestD){ closestD = near; closest = el.dataset.scene; }
     }
-    if (closest && closest !== showing){ showing = closest; nowEl.textContent = closest; }
+    if (closest && closest !== showing){
+      showing = closest;
+      nowEl.textContent = closest;
+      const src = scenes.find(el => el.dataset.scene === closest);
+      const tint = src && getComputedStyle(src).getPropertyValue('--accent').trim();
+      if (tint) document.documentElement.style.setProperty('--accent', tint);
+    }
 
     const max = document.body.scrollHeight - vh;
     clockEl.textContent = mmss(max > 0 ? (scrollY / max) * RUNTIME : 0);
