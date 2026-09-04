@@ -107,7 +107,9 @@ html:not(.js) .hero{grid-template-columns:1fr;min-height:auto}
 /* ── product bands ────────────────────────────────────────────── */
 .work{padding-block:var(--band);border-top:1px solid var(--etch)}
 .role{font:500 12px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;
-      color:var(--brass);margin:0 0 20px}
+      color:var(--brass);margin:0 0 20px;display:flex;align-items:center;gap:14px}
+/* the app's own mark, at the size it was drawn to be read at */
+.role img{width:40px;height:40px;border-radius:9px;flex:none}
 .work h2{font-family:var(--display);font-weight:400;
          font-size:clamp(2.2rem,4.4vw,3.5rem);line-height:1.04;letter-spacing:-.012em;
          color:var(--bone);margin:0 0 22px}
@@ -218,7 +220,7 @@ footer a:hover{color:var(--lit);border-color:var(--lit)}
 <main id="work">
 
   <section class="work wrap" id="gola" data-product="Gola">
-    <p class="role">Windows app</p>
+    <p class="role"><img src="img/logo-gola.png" width="96" height="96" alt="" decoding="async">Windows app</p>
     <h2>Gola</h2>
     <p class="say">Hold the chord and a wheel opens where the cursor already is. Flick toward
       what you want, release — apps, folders, and the windows you already have open, fanned out
@@ -285,7 +287,7 @@ footer a:hover{color:var(--lit);border-color:var(--lit)}
   </section>
 
   <section class="work wrap" id="recno" data-product="Recno">
-    <p class="role">iOS app</p>
+    <p class="role"><img src="img/logo-recno.png" width="96" height="96" alt="" decoding="async">iOS app</p>
     <h2>Recno</h2>
     <p class="say">Jobsite records for contractors, shipped after a spell as SitesLog. It sorts work photos by
       the site they were taken at, including the ones already sitting in your camera roll, and
@@ -317,7 +319,7 @@ footer a:hover{color:var(--lit);border-color:var(--lit)}
   </section>
 
   <section class="work wrap" id="moonrain" data-product="Moonrain">
-    <p class="role">iOS app</p>
+    <p class="role"><img src="img/logo-moonrain.png" width="96" height="96" alt="" decoding="async">iOS app</p>
     <h2>Moonrain</h2>
     <p class="say">A sleep aid built around the part everyone actually uses: the timer. Pick a
       sound, set a fade-out, let the screen dim itself on the way down. <b>Twenty-four sounds,
