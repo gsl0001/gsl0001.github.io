@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-04T02:56:39.140Z",
+        "reason": "user confirmed: .facts is a hairline rule, not a card, and .plate is a tight frame around a screenshot — padding would read as a mat"
+      }
+    ]
+  }
+}
