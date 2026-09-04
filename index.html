@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gurwinder Singh — shipped work</title>
-<meta name="description" content="Gurwinder Singh, Vancouver BC. Gola, Cortex, SitesLog, Moonrain, Tracket — shipped Windows and iOS apps and tooling for coding agents.">
+<meta name="description" content="Gurwinder Singh, Vancouver BC. Gola, Cortex, Recno, Moonrain, Tracket — shipped Windows and iOS apps and tooling for coding agents.">
 <meta property="og:title" content="Gurwinder Singh — shipped work">
 <meta property="og:description" content="Built in Vancouver. Running on other people's machines.">
 <meta property="og:image" content="https://gsl0001.github.io/img/hero-gola.jpg">
@@ -200,7 +200,8 @@ footer a:hover{color:var(--lit);border-color:var(--lit)}
       <h1>Built in Vancouver. Running on other people's machines.</h1>
       <p class="lede">Six shipped things: a radial launcher for Windows, a memory layer for
         coding agents, two iOS apps, a continuity tool, and a set of options systems that
-        fail closed. <b>Everything here is finished and in use</b> — no concepts, no mockups.</p>
+        fail closed. <b>Everything here is finished and in use</b> — no concepts, no mockups.
+        Both phone apps are through App Review.</p>
 
       <dl class="standing">
         <div><dt>Shipped</dt><dd>Six products</dd></div>
@@ -219,37 +220,40 @@ footer a:hover{color:var(--lit);border-color:var(--lit)}
   <section class="work wrap" id="gola" data-product="Gola">
     <p class="role">Windows app</p>
     <h2>Gola</h2>
-    <p class="say">Hold the hotkey and a wheel opens where the cursor already is. Flick toward
-      what you want, release — apps, folders, the windows you already have open. A second
-      ring carries the small tools you'd otherwise go hunting for: <b>magnifier, timer,
-      colour picker, calculator, quick note</b>.</p>
+    <p class="say">Hold the chord and a wheel opens where the cursor already is. Flick toward
+      what you want, release — apps, folders, and the windows you already have open, fanned out
+      as live previews. Whatever is playing lives in the centre: <b>album art, transport and a
+      volume ring you scroll</b>. A second ring carries the small tools you'd otherwise go
+      hunting for — magnifier, timer, colour picker, calculator, dictation — next to a Shelf
+      that takes files from your phone and a dock for the windows you park.</p>
     <dl class="facts">
       <div><dt>Platform</dt><dd>Windows</dd></div>
-      <div><dt>Built with</dt><dd>C#</dd></div>
+      <div><dt>Built with</dt><dd>C# · WPF · .NET 8</dd></div>
+      <div><dt>Version</dt><dd>1.0.0 · no account, no telemetry</dd></div>
       <div><dt>Setup</dt><dd><a href="https://gsl0001.github.io/gola/">gsl0001.github.io/gola</a></dd></div>
     </dl>
     <div class="shots wide">
       <figure>
         <div class="plate">
-          <img src="img/hero-gola.jpg" width="1800" height="1012" loading="lazy" decoding="async"
-            alt="Gola's radial wheel open over a desktop, with Claude, ChatGPT, Edge, Files and Terminal on its ring">
+          <img src="img/hero-gola.jpg" width="1600" height="900" loading="lazy" decoding="async"
+            alt="Gola's wheel held open: a track playing in the centre hub with album art, transport and a volume ring, apps around it">
         </div>
-        <figcaption>The wheel, held open mid-keystroke</figcaption>
+        <figcaption>The wheel, held open — the centre is whatever is playing</figcaption>
       </figure>
       <div class="stack">
         <figure>
           <div class="plate">
-            <img src="img/gola-tools.jpg" width="1200" height="676" loading="lazy" decoding="async"
-              alt="Gola's outer Tools ring fanned out with magnifier, calculator, timer, quick note, screenshot and dictate">
+            <img src="img/gola-fan.jpg" width="1400" height="788" loading="lazy" decoding="async"
+              alt="Gola's Files slice fanned out into its two open Explorer windows plus a New window action">
           </div>
-          <figcaption>Tools ring, fanned out</figcaption>
+          <figcaption>An app slice fans out into its own windows</figcaption>
         </figure>
         <figure>
           <div class="plate">
-            <img src="img/gola-settings.jpg" width="1000" height="562" loading="lazy" decoding="async"
-              alt="Gola's settings window">
+            <img src="img/gola-tools.jpg" width="1200" height="675" loading="lazy" decoding="async"
+              alt="Gola's outer Tools ring fanned out: magnifier, colour, calculator, timer, quick note, screenshot, dictate, caffeine, focus dim">
           </div>
-          <figcaption>Settings</figcaption>
+          <figcaption>Tools ring, fanned out</figcaption>
         </figure>
       </div>
     </div>
@@ -260,11 +264,13 @@ footer a:hover{color:var(--lit);border-color:var(--lit)}
     <h2>Cortex</h2>
     <p class="say">Memory for coding agents. Claude Code and Codex hand off to each other, and
       to their own future sessions, through <b>one Node process and one SQLite file</b>.
-      Nothing leaves the machine. It ships with MCP tools, hooks, a CLI, and an optional
-      autopilot that works a task queue on its own.</p>
+      Nothing leaves the machine. On top of the memory sit a command centre for blocked work and
+      unresolved questions, an evening brief of what actually happened, a per-project autonomy
+      dial, and an autopilot that works the task queue on its own.</p>
     <dl class="facts">
       <div><dt>Runs on</dt><dd>Node · SQLite</dd></div>
       <div><dt>Speaks</dt><dd>MCP, hooks, CLI</dd></div>
+      <div><dt>Tests</dt><dd>399 passing · MIT</dd></div>
       <div><dt>Source</dt><dd><a href="https://github.com/gsl0001/Cortex">github.com/gsl0001/Cortex</a></dd></div>
     </dl>
     <div class="shots">
@@ -278,31 +284,34 @@ footer a:hover{color:var(--lit);border-color:var(--lit)}
     </div>
   </section>
 
-  <section class="work wrap" id="siteslog" data-product="SitesLog">
+  <section class="work wrap" id="recno" data-product="Recno">
     <p class="role">iOS app</p>
-    <h2>SitesLog</h2>
-    <p class="say">Jobsite photo reports for contractors. It sorts work photos by the site they
-      were taken at, then turns a day of them into a <b>PDF, HTML or CSV report</b> the client
-      can actually read — without the weight of full construction software.</p>
+    <h2>Recno</h2>
+    <p class="say">Jobsite records for contractors, shipped after a spell as SitesLog. It sorts work photos by
+      the site they were taken at, including the ones already sitting in your camera roll, and
+      turns a day of them into a <b>PDF, HTML or CSV report</b> the client can actually read.
+      The crew clocks in and out on the geofence, and those hours come back as a timesheet with
+      overtime, pay periods, labour cost and a payroll export.</p>
     <dl class="facts">
       <div><dt>Platform</dt><dd>iOS</dd></div>
-      <div><dt>Photos</dt><dd>Sorted on device</dd></div>
+      <div><dt>Everything</dt><dd>On device · SQLite</dd></div>
+      <div><dt>Status</dt><dd>v1.0.0 through App Review</dd></div>
       <div><dt>Support</dt><dd><a href="https://gsl0001.github.io/siteslog/">gsl0001.github.io/siteslog</a></dd></div>
     </dl>
     <div class="shots phones">
       <figure>
         <div class="plate">
-          <img src="img/siteslog-home.jpg" width="560" height="1214" loading="lazy" decoding="async"
-            alt="SitesLog home screen showing the current jobsite address, counters and quick actions">
+          <img src="img/recno-home.jpg" width="560" height="1214" loading="lazy" decoding="async"
+            alt="Recno home screen showing the jobsite you are standing on, photo and job counters, and quick actions">
         </div>
         <figcaption>Home, standing on site</figcaption>
       </figure>
       <figure>
         <div class="plate">
-          <img src="img/siteslog-report.jpg" width="560" height="1214" loading="lazy" decoding="async"
-            alt="SitesLog report builder screen">
+          <img src="img/recno-day.jpg" width="560" height="1214" loading="lazy" decoding="async"
+            alt="Recno daily log: a timeline of the day's photos by site, with crew clock-ins and hours on the clock">
         </div>
-        <figcaption>The report builder</figcaption>
+        <figcaption>A day, by site and by hour</figcaption>
       </figure>
     </div>
   </section>
@@ -311,11 +320,13 @@ footer a:hover{color:var(--lit);border-color:var(--lit)}
     <p class="role">iOS app</p>
     <h2>Moonrain</h2>
     <p class="say">A sleep aid built around the part everyone actually uses: the timer. Pick a
-      sound, set a fade-out, let the screen dim itself on the way down.
-      <b>Mixes, favourites and Siri shortcuts</b> for the rest.</p>
+      sound, set a fade-out, let the screen dim itself on the way down. <b>Twenty-four sounds,
+      four-layer mixes, favourites and Siri shortcuts</b> for the rest — offline, no account,
+      no network.</p>
     <dl class="facts">
       <div><dt>Platform</dt><dd>iOS</dd></div>
       <div><dt>Built with</dt><dd>Swift · SwiftUI</dd></div>
+      <div><dt>On the store</dt><dd><a href="https://apps.apple.com/us/app/moonrain-sleep-sounds/id6789770084">Moonrain 1.1</a></dd></div>
       <div><dt>Support</dt><dd><a href="https://gsl0001.github.io/sleepaid-site/">gsl0001.github.io/sleepaid-site</a></dd></div>
     </dl>
     <div class="shots phones">
