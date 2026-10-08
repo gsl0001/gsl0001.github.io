@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flux privacy policy</title>
+<meta name="description" content="What Flux stores, what it sends, and to whom. No account, no telemetry, no analytics.">
+<meta name="theme-color" content="#08080d">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .policy { max-width: 720px; padding-block: clamp(40px, 6vw, 80px); }
+  .policy h1 { margin: 0 0 8px; font-size: clamp(34px, 5vw, 52px); line-height: 1; }
+  .policy h2 { margin: 40px 0 12px; font-size: 24px; }
+  .policy p, .policy li { color: var(--fog); }
+  .policy a { color: var(--cyan); }
+  .policy table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  .policy th, .policy td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--seam); }
+  .policy td { color: var(--fog); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a href="./" class="brand" aria-label="Flux home">
+      <svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true"><path d="M18 54V18L26 10H47M18 33H31L37 27" fill="none" stroke="#ff2e88" stroke-width="6"/><circle cx="18" cy="54" r="4.5" fill="#08080d" stroke="#ff2e88" stroke-width="3"/><circle cx="49" cy="10" r="4" fill="#ff2e88"/><circle cx="39" cy="25" r="4" fill="#ff2e88"/></svg>
+      <span class="d">Flux</span>
+    </a>
+  </div>
+</header>
+
+<main class="wrap policy">
+  <h1 class="d">Privacy policy</h1>
+  <p class="lab">Flux 0.2.0 · Last updated 7 October 2026</p>
+
+  <h2 class="d">In short</h2>
+  <p>Flux has no account, no telemetry and no analytics. It does not collect personal data, and nothing it stores leaves your PC.</p>
+
+  <h2 class="d">What Flux stores on your PC</h2>
+  <p>Everything below lives in your user profile and is never uploaded. Settings › Privacy in the app lists each store with its path and size.</p>
+  <ul>
+    <li>Your settings, pinned apps, workspaces and snippets.</li>
+    <li>How often you open each result, so the ones you use most rank first.</li>
+    <li>A cache of app icons.</li>
+    <li>Log files for troubleshooting. Search queries are never written to them.</li>
+    <li>Clipboard history, only if you turn it on. It is off until you answer the question during setup.</li>
+  </ul>
+
+  <h2 class="d">What Flux sends over the network</h2>
+  <p>A shipping build makes three kinds of request, and no others.</p>
+  <table>
+    <thead><tr><th class="lab">Request</th><th class="lab">When</th><th class="lab">Goes to</th></tr></thead>
+    <tbody>
+      <tr><td>Checks for a new version of Flux</td><td>Only while update checks are on. You can turn them off.</td><td>github.com</td></tr>
+      <tr><td>Opens a web search in your browser</td><td>Only when you press Enter on a "search the web" result</td><td>www.google.com, through your browser</td></tr>
+      <tr><td>Looks up your place and its weather</td><td>Only while the weather card is on and you have set a place</td><td>Open-Meteo (api.open-meteo.com, geocoding-api.open-meteo.com)</td></tr>
+    </tbody>
+  </table>
+  <p>Those services receive what any web request carries, such as your IP address, and the place name for the weather lookup. Their own privacy policies apply to it. Flux sends them nothing else.</p>
+
+  <h2 class="d">Children</h2>
+  <p>Flux does not knowingly collect information from anyone, including children.</p>
+
+  <h2 class="d">Changes and contact</h2>
+  <p>Changes to this policy are published on this page. Questions can be sent to <a href="mailto:gsl456789@gmail.com">gsl456789@gmail.com</a>.</p>
+</main>
+
+<footer class="foot">
+  <div class="wrap"><span>FLUX 0.2.0 · WINDOWS 11 · TAURI 2</span><span>EVERYTHING FLUX STORES STAYS ON THIS PC</span></div>
+</footer>
+</body>
+</html>
